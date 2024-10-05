@@ -1,6 +1,4 @@
-using DineHub.Domain.Entities;
-
-namespace DineHub.Application.Dtos;
+namespace DineHub.Application.Dtos.DishDtos;
 
 public class DishDto
 {

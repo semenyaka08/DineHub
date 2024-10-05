@@ -1,11 +1,7 @@
-using DineHub.Domain.Entities;
+namespace DineHub.Application.Dtos.RestaurantDtos;
 
-namespace DineHub.Application.Dtos;
-
-public class RestaurantDto
+public class CreateRestaurantDto
 {
-    public Guid Id { get; set; }
-
     public string Name { get; set; } = string.Empty;
 
     public string Description { get; set; } = string.Empty;
@@ -14,11 +10,13 @@ public class RestaurantDto
 
     public bool HasDelivery { get; set; }
 
+    public string? ContactEmail { get; set; }
+
+    public string? ContactPhone { get; set; }
+    
     public string City { get; set; } = string.Empty;
 
     public string Street { get; set; } = string.Empty;
 
     public string PostalCode { get; set; } = string.Empty;
-
-    public List<DishDto> Dishes { get; set; } = [];
 }

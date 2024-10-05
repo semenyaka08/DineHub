@@ -1,3 +1,4 @@
+using DineHub.Application.Dtos.RestaurantDtos;
 using DineHub.Application.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -24,5 +25,13 @@ public class RestaurantsController(IRestaurantService restaurantService) : Contr
             return NotFound("restaurant was not found!");
 
         return Ok(result);
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> CreateRestaurant([FromBody] CreateRestaurantDto request)
+    {
+        Guid id = await restaurantService.AddRestaurant(request);
+
+        return CreatedAtAction(nameof(GetRestaurantById), new {id}, null);
     }
 }

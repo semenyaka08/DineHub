@@ -7,4 +7,6 @@ public interface IRestaurantRepository
     Task<List<Restaurant>> GetAllRestaurants();
 
     Task<Restaurant?> GetById(Guid id);
+
+    Task<Guid> AddRestaurant(Restaurant restaurant);
 }

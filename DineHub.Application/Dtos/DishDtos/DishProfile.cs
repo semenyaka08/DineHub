@@ -1,12 +1,12 @@
 using AutoMapper;
 using DineHub.Domain.Entities;
 
-namespace DineHub.Application.Dtos;
+namespace DineHub.Application.Dtos.DishDtos;
 
 public class DishProfile : Profile
 {
     public DishProfile()
     {
-        CreateMap<Dish, DishDto>();
+        CreateMap<Dish, DishDtos.DishDto>();
     }
 }

@@ -15,4 +15,13 @@ public class RestaurantRepository(ApplicationDbContext context) : IRestaurantRep
     {
         return await context.Restaurants.Include(z=>z.Dishes).FirstOrDefaultAsync(z=>z.Id == id);
     }
+
+    public async Task<Guid> AddRestaurant(Restaurant restaurant)
+    {
+        await context.Restaurants.AddAsync(restaurant);
+        
+        await context.SaveChangesAsync();
+
+        return restaurant.Id;
+    }
 }

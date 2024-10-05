@@ -1,3 +1,5 @@
+using DineHub.Domain.RepositoryContracts;
+using DineHub.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -12,5 +14,6 @@ public static class ServiceCollectionExtensions
         {
             options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"));
         });
+        serviceCollection.AddScoped<IRestaurantRepository, RestaurantRepository>();
     }
 }

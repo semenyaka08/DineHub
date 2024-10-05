@@ -49,7 +49,7 @@ namespace DineHub.Infrastructure.Migrations
 
                     b.HasIndex("RestaurantId");
 
-                    b.ToTable("Dish");
+                    b.ToTable("Dishes");
                 });
 
             modelBuilder.Entity("DineHub.Domain.Entities.Restaurant", b =>
@@ -81,7 +81,7 @@ namespace DineHub.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Restaurant");
+                    b.ToTable("Restaurants");
                 });
 
             modelBuilder.Entity("DineHub.Domain.Entities.Dish", b =>
@@ -116,7 +116,7 @@ namespace DineHub.Infrastructure.Migrations
 
                             b1.HasKey("RestaurantId");
 
-                            b1.ToTable("Restaurant");
+                            b1.ToTable("Restaurants");
 
                             b1.WithOwner()
                                 .HasForeignKey("RestaurantId");

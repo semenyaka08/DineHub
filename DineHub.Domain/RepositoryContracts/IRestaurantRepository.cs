@@ -9,4 +9,8 @@ public interface IRestaurantRepository
     Task<Restaurant?> GetById(Guid id);
 
     Task<Guid> AddRestaurant(Restaurant restaurant);
+
+    Task<bool> DeleteRestaurant(Restaurant restaurant);
+
+    Task<bool> SaveChanges();
 }

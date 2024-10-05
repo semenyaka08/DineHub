@@ -1,4 +1,6 @@
 using AutoMapper;
+using DineHub.Application.Commands.Restaurants;
+using DineHub.Application.Queries.Restaurants.Dtos;
 using DineHub.Domain.Entities;
 
 namespace DineHub.Application.Dtos.RestaurantDtos;
@@ -7,7 +9,9 @@ public class RestaurantProfile : Profile
 {
     public RestaurantProfile()
     {
-        CreateMap<CreateRestaurantDto, Restaurant>()
+        CreateMap<UpdateRestaurantCommand, Restaurant>();
+        
+        CreateMap<CreateRestaurantCommand, Restaurant>()
             .ForMember(z => z.Address, opt =>
                 opt.MapFrom(src => new Address
                 {

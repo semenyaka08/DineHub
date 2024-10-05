@@ -24,4 +24,19 @@ public class RestaurantRepository(ApplicationDbContext context) : IRestaurantRep
 
         return restaurant.Id;
     }
+
+    public async Task<bool> DeleteRestaurant(Restaurant restaurant)
+    {
+        context.Remove(restaurant);
+        
+        await context.SaveChangesAsync();
+        
+        return true;
+    }
+
+    public async Task<bool> SaveChanges()
+    {
+        await context.SaveChangesAsync();
+        return true;
+    }
 }

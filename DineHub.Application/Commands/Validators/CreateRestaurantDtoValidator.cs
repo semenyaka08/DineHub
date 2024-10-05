@@ -1,9 +1,9 @@
-using DineHub.Application.Dtos.RestaurantDtos;
+using DineHub.Application.Commands.Restaurants;
 using FluentValidation;
 
-namespace DineHub.Application.Validators;
+namespace DineHub.Application.Commands.Validators;
 
-public class CreateRestaurantDtoValidator : AbstractValidator<CreateRestaurantDto>
+public class CreateRestaurantDtoValidator : AbstractValidator<CreateRestaurantCommand>
 {
     public CreateRestaurantDtoValidator()
     {

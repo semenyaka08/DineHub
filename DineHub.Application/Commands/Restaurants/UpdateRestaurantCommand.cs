@@ -1,7 +1,11 @@
-namespace DineHub.Application.Dtos.RestaurantDtos;
+using MediatR;
 
-public class CreateRestaurantDto
+namespace DineHub.Application.Commands.Restaurants;
+
+public class UpdateRestaurantCommand : IRequest<bool>
 {
+    public Guid Id { get; set; } // Id of the restaurant we are trying to update
+    
     public string Name { get; set; } = string.Empty;
 
     public string Description { get; set; } = string.Empty;

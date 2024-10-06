@@ -12,7 +12,8 @@ public static class ServiceCollectionExtensions
     {
         serviceCollection.AddDbContext<ApplicationDbContext>(options =>
         {
-            options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"));
+            options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"))
+                .EnableSensitiveDataLogging();
         });
         serviceCollection.AddScoped<IRestaurantRepository, RestaurantRepository>();
     }

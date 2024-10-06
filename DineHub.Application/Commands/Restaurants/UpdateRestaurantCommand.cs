@@ -2,7 +2,7 @@ using MediatR;
 
 namespace DineHub.Application.Commands.Restaurants;
 
-public class UpdateRestaurantCommand : IRequest<bool>
+public class UpdateRestaurantCommand : IRequest
 {
     public Guid Id { get; set; } // Id of the restaurant we are trying to update
     

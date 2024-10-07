@@ -1,6 +1,7 @@
 using DineHub.Application.Commands.Restaurants;
 using DineHub.Application.Queries.Restaurants;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DineHub.Api.Controllers;
@@ -9,6 +10,7 @@ namespace DineHub.Api.Controllers;
 [Route("api/restaurants")]
 public class RestaurantsController(IMediator mediator) : ControllerBase
 {
+    [Authorize]
     [HttpGet]
     public async Task<IActionResult> GetAllRestaurants()
     {

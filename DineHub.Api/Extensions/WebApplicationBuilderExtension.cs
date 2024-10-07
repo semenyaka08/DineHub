@@ -8,6 +8,7 @@ public static class WebApplicationBuilderExtension
 {
     public static void AddPresentation(this WebApplicationBuilder builder)
     {
+        builder.Services.AddAuthentication();
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen(configuration =>
         {
@@ -25,7 +26,7 @@ public static class WebApplicationBuilderExtension
                         Reference = new OpenApiReference
                         {
                             Type = ReferenceType.SecurityScheme,
-                            Id = "BearerAuth"
+                            Id = "bearerAuth"
                         }
                     },
                     []

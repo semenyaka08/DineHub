@@ -1,25 +1,16 @@
+using DineHub.Api.Extensions;
 using DineHub.Api.Middlewares;
 using DineHub.Application.Extensions;
 using DineHub.Domain.Entities;
 using DineHub.Infrastructure;
+using Microsoft.OpenApi.Models;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-builder.Services.AddControllers();
-
+builder.AddPresentation();
 builder.Services.AddInfrastructure(builder.Configuration);
 builder.Services.AddApplication();
-
-builder.Services.AddScoped<ExceptionHandlingMiddleware>();
-
-//Serilog configuration
-builder.Host.UseSerilog((context, configuration) =>
-{
-    configuration.ReadFrom.Configuration(context.Configuration);
-});
 
 var app = builder.Build();
 
@@ -34,7 +25,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.MapIdentityApi<User>();
+app.MapGroup("api/identity").MapIdentityApi<User>();
 
 app.UseHttpsRedirection();
 

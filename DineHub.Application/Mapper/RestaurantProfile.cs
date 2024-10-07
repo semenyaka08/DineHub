@@ -1,8 +1,9 @@
 using AutoMapper;
-using DineHub.Application.Queries.Restaurants.Dtos;
+using DineHub.Application.Commands.Restaurants;
+using DineHub.Application.Dtos.RestaurantDtos;
 using DineHub.Domain.Entities;
 
-namespace DineHub.Application.Commands.Restaurants.Dtos;
+namespace DineHub.Application.Mapper;
 
 public class RestaurantProfile : Profile
 {

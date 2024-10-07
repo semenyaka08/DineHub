@@ -1,5 +1,5 @@
 using AutoMapper;
-using DineHub.Application.Queries.Restaurants.Dtos;
+using DineHub.Application.Dtos.RestaurantDtos;
 using DineHub.Domain.Entities;
 using DineHub.Domain.Exceptions;
 using DineHub.Domain.RepositoryContracts;

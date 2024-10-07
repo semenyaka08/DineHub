@@ -16,5 +16,6 @@ public static class ServiceCollectionExtensions
                 .EnableSensitiveDataLogging();
         });
         serviceCollection.AddScoped<IRestaurantRepository, RestaurantRepository>();
+        serviceCollection.AddScoped<IDishRepository, DishRepository>();
     }
 }

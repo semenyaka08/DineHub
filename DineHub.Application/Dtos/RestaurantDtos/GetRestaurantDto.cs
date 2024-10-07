@@ -1,6 +1,6 @@
 using DineHub.Application.Dtos.DishDtos;
 
-namespace DineHub.Application.Queries.Restaurants.Dtos;
+namespace DineHub.Application.Dtos.RestaurantDtos;
 
 public class GetRestaurantDto
 {

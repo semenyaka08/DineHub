@@ -1,4 +1,4 @@
-using DineHub.Application.Queries.Restaurants.Dtos;
+using DineHub.Application.Dtos.RestaurantDtos;
 using MediatR;
 
 namespace DineHub.Application.Queries.Restaurants;

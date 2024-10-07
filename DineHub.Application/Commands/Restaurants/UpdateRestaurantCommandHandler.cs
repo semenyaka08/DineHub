@@ -1,12 +1,11 @@
 using AutoMapper;
-using DineHub.Application.Commands.Restaurants;
 using DineHub.Domain.Entities;
 using DineHub.Domain.Exceptions;
 using DineHub.Domain.RepositoryContracts;
 using MediatR;
 using Microsoft.Extensions.Logging;
 
-namespace DineHub.Application.Commands;
+namespace DineHub.Application.Commands.Restaurants;
 
 public class UpdateRestaurantCommandHandler(ILogger<UpdateRestaurantCommandHandler> logger, IRestaurantRepository restaurantRepository, IMapper mapper) : IRequestHandler<UpdateRestaurantCommand>
 {

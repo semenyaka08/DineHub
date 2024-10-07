@@ -3,9 +3,9 @@ using FluentValidation;
 
 namespace DineHub.Application.Commands.Validators;
 
-public class CreateRestaurantDtoValidator : AbstractValidator<CreateRestaurantCommand>
+public class CreateRestaurantCommandValidator : AbstractValidator<CreateRestaurantCommand>
 {
-    public CreateRestaurantDtoValidator()
+    public CreateRestaurantCommandValidator()
     {
         RuleFor(z=>z.Name)
             .Length(3, 100);

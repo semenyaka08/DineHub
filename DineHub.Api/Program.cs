@@ -1,5 +1,6 @@
 using DineHub.Api.Middlewares;
 using DineHub.Application.Extensions;
+using DineHub.Domain.Entities;
 using DineHub.Infrastructure;
 using Serilog;
 
@@ -22,15 +23,18 @@ builder.Host.UseSerilog((context, configuration) =>
 
 var app = builder.Build();
 
+//Configure the Http request pipeline
+app.UseMiddleware<ExceptionHandlingMiddleware>();
+
+app.UseSerilogRequestLogging();
+
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-//Configure the Http request pipeline
-app.UseMiddleware<ExceptionHandlingMiddleware>();
 
-app.UseSerilogRequestLogging();
+app.MapIdentityApi<User>();
 
 app.UseHttpsRedirection();
 

@@ -1,3 +1,4 @@
+using DineHub.Domain.Entities;
 using DineHub.Domain.RepositoryContracts;
 using DineHub.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
@@ -15,6 +16,10 @@ public static class ServiceCollectionExtensions
             options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"))
                 .EnableSensitiveDataLogging();
         });
+
+        serviceCollection.AddIdentityApiEndpoints<User>()
+            .AddEntityFrameworkStores<ApplicationDbContext>();
+        
         serviceCollection.AddScoped<IRestaurantRepository, RestaurantRepository>();
         serviceCollection.AddScoped<IDishRepository, DishRepository>();
     }

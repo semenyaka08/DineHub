@@ -4,4 +4,4 @@ using FluentValidation;
 
 namespace DineHub.Application.Commands.Validators;
 
-public class CreateDishCommandValidator() : DishValidatorBase<CreateDishCommand>(z => z.Price, z => z.KiloCalories);
+public class UpdateDishCommandValidator() : DishValidatorBase<CreateDishCommand>(z => z.Price, z => z.KiloCalories);

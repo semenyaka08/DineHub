@@ -1,21 +1,8 @@
 using DineHub.Application.Commands.Restaurants;
+using DineHub.Application.Commands.Validators.Abstraction;
 using FluentValidation;
 
 namespace DineHub.Application.Commands.Validators;
 
-public class CreateRestaurantCommandValidator : AbstractValidator<CreateRestaurantCommand>
-{
-    public CreateRestaurantCommandValidator()
-    {
-        RuleFor(z=>z.Name)
-            .Length(3, 100);
-
-        RuleFor(z=>z.ContactEmail)
-            .EmailAddress()
-            .WithMessage("Enter a valid email address");
-
-        RuleFor(z => z.PostalCode)
-            .Matches(@"^\d{2}-\d{3}$")
-            .WithMessage("Please provide a valid postal code (XX-XXX).");
-    }
-}
+public class CreateRestaurantCommandValidator()
+    : RestaurantValidatorBase<CreateRestaurantCommand>(z => z.Name, z => z.ContactEmail, z => z.PostalCode);

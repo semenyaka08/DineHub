@@ -13,12 +13,12 @@ public class UpdateRestaurantCommandHandler(ILogger<UpdateRestaurantCommandHandl
     {
         logger.LogInformation("Updating restaurant with id: {Id}", request.Id);
         
-        var restaurant = await restaurantRepository.GetById(request.Id);
+        var restaurant = await restaurantRepository.GetByIdAsync(request.Id);
 
         if (restaurant == null)
             throw new NotFoundException(nameof(Restaurant), request.Id.ToString());
 
         mapper.Map(request, restaurant);
-        await restaurantRepository.SaveChanges();
+        await restaurantRepository.SaveChangesAsync();
     }
 }

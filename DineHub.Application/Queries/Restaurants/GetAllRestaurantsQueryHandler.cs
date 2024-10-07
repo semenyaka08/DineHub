@@ -12,9 +12,9 @@ public class GetAllRestaurantsQueryHandler(ILogger<GetAllRestaurantsQueryHandler
     {
         logger.LogInformation("Getting all restaurants!");
 
-        var restaurant = await restaurantRepository.GetAllRestaurants();
+        var restaurants = await restaurantRepository.GetAllRestaurantsAsync();
 
-        var restaurantsDto = mapper.Map<List<GetRestaurantDto>>(restaurant);
+        var restaurantsDto = mapper.Map<List<GetRestaurantDto>>(restaurants);
 
         return restaurantsDto;
     }

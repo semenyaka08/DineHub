@@ -14,7 +14,7 @@ public class GetRestaurantByIdQueryHandler(ILogger<GetRestaurantByIdQueryHandler
     {
         logger.LogInformation("Getting restaurant with id: {Id}", request.Id);
 
-        var restaurant = await restaurantRepository.GetById(request.Id);
+        var restaurant = await restaurantRepository.GetByIdAsync(request.Id);
 
         if (restaurant == null)
             throw new NotFoundException(nameof(Restaurant), request.Id.ToString());

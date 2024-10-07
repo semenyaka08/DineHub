@@ -13,7 +13,7 @@ public class CreateDishCommandHandler(ILogger<CreateDishCommandHandler> logger, 
     {
         logger.LogInformation("Creating a new dish: {@Dish}", request);
 
-        var restaurant = await restaurantRepository.GetById(request.RestaurantId);
+        var restaurant = await restaurantRepository.GetByIdAsync(request.RestaurantId);
 
         if (restaurant == null)
             throw new NotFoundException(nameof(Restaurant), request.RestaurantId.ToString());

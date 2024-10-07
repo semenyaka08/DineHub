@@ -4,13 +4,13 @@ namespace DineHub.Domain.RepositoryContracts;
 
 public interface IRestaurantRepository
 {
-    Task<List<Restaurant>> GetAllRestaurants();
+    Task<List<Restaurant>> GetAllRestaurantsAsync();
 
-    Task<Restaurant?> GetById(Guid id);
+    Task<Restaurant?> GetByIdAsync(Guid id);
 
-    Task<Guid> AddRestaurant(Restaurant restaurant);
+    Task<Guid> AddRestaurantAsync(Restaurant restaurant);
 
-    Task<bool> DeleteRestaurant(Restaurant restaurant);
+    Task<bool> DeleteRestaurantAsync(Restaurant restaurant);
 
-    Task<bool> SaveChanges();
+    Task<bool> SaveChangesAsync();
 }

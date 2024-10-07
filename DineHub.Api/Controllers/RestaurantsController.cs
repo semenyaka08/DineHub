@@ -42,7 +42,7 @@ public class RestaurantsController(IMediator mediator) : ControllerBase
     }
 
     [HttpPatch("{id}")]
-    public async Task<IActionResult> UpdateRestaurant(Guid id, [FromBody] UpdateRestaurantCommand request)
+    public async Task<IActionResult> UpdateRestaurant([FromRoute] Guid id, [FromBody] UpdateRestaurantCommand request)
     {
         request.Id = id;
         

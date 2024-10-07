@@ -6,17 +6,17 @@ namespace DineHub.Infrastructure.Repositories;
 
 public class RestaurantRepository(ApplicationDbContext context) : IRestaurantRepository
 {
-    public async Task<List<Restaurant>> GetAllRestaurants()
+    public async Task<List<Restaurant>> GetAllRestaurantsAsync()
     {
         return await context.Restaurants.Include(z=>z.Dishes).ToListAsync();
     }
 
-    public async Task<Restaurant?> GetById(Guid id)
+    public async Task<Restaurant?> GetByIdAsync(Guid id)
     {
         return await context.Restaurants.Include(z=>z.Dishes).FirstOrDefaultAsync(z=>z.Id == id);
     }
 
-    public async Task<Guid> AddRestaurant(Restaurant restaurant)
+    public async Task<Guid> AddRestaurantAsync(Restaurant restaurant)
     {
         await context.Restaurants.AddAsync(restaurant);
         
@@ -25,7 +25,7 @@ public class RestaurantRepository(ApplicationDbContext context) : IRestaurantRep
         return restaurant.Id;
     }
 
-    public async Task<bool> DeleteRestaurant(Restaurant restaurant)
+    public async Task<bool> DeleteRestaurantAsync(Restaurant restaurant)
     {
         context.Remove(restaurant);
         
@@ -34,7 +34,7 @@ public class RestaurantRepository(ApplicationDbContext context) : IRestaurantRep
         return true;
     }
 
-    public async Task<bool> SaveChanges()
+    public async Task<bool> SaveChangesAsync()
     {
         await context.SaveChangesAsync();
         return true;

@@ -22,9 +22,20 @@ public class DataSeeder(ApplicationDbContext context ) : IDataSeeder
     {
         List<IdentityRole> roles = 
         [
-            new IdentityRole(ApplicationRoles.User),
-            new IdentityRole(ApplicationRoles.Admin),
-            new IdentityRole(ApplicationRoles.Owner),
+            new IdentityRole(ApplicationRoles.User)
+            {
+                NormalizedName = ApplicationRoles.User.ToUpper()
+            },
+            new IdentityRole(ApplicationRoles.Admin)
+            {
+                
+                NormalizedName = ApplicationRoles.Admin.ToUpper()
+            },
+            new IdentityRole(ApplicationRoles.Owner)
+            {
+                
+                NormalizedName = ApplicationRoles.Owner.ToUpper()
+            },
         ];
 
         return roles;

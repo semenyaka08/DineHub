@@ -1,5 +1,6 @@
 using AutoMapper;
 using DineHub.Application.Dtos.RestaurantDtos;
+using DineHub.Application.User;
 using DineHub.Domain.RepositoryContracts;
 using MediatR;
 using Microsoft.Extensions.Logging;

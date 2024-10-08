@@ -19,4 +19,8 @@ public class Restaurant
     public Address? Address { get; set; }
 
     public ICollection<Dish> Dishes { get; set; } = [];
+
+    public User User { get; set; }
+
+    public string UserId { get; set; }
 }

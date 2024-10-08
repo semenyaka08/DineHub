@@ -1,5 +1,6 @@
 using DineHub.Application.Commands.Restaurants;
 using DineHub.Application.Queries.Restaurants;
+using DineHub.Domain.Constants;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -10,8 +11,8 @@ namespace DineHub.Api.Controllers;
 [Route("api/restaurants")]
 public class RestaurantsController(IMediator mediator) : ControllerBase
 {
-    [Authorize]
     [HttpGet]
+    [Authorize(Policy = ApplicationPolicies.MinimumAgeAndNationalityPolicy)]
     public async Task<IActionResult> GetAllRestaurants()
     {
         var restaurants = await mediator.Send(new GetAllRestaurantsQuery());
@@ -26,7 +27,8 @@ public class RestaurantsController(IMediator mediator) : ControllerBase
 
         return Ok(result);
     }
-
+    
+    [Authorize(Roles = ApplicationRoles.Owner)]
     [HttpPost]
     public async Task<IActionResult> CreateRestaurant([FromBody] CreateRestaurantCommand request)
     {
@@ -35,6 +37,7 @@ public class RestaurantsController(IMediator mediator) : ControllerBase
         return CreatedAtAction(nameof(GetRestaurantById), new {id}, null);
     }
 
+    [Authorize(Roles = ApplicationRoles.Admin)]
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteRestaurantById(Guid id)
     {

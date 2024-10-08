@@ -18,6 +18,14 @@ public class ExceptionHandlingMiddleware(ILogger<ExceptionHandlingMiddleware> lo
 
             await context.Response.WriteAsync(ex.Message);
         }
+        catch (ForbiddenException ex)
+        {
+            logger.LogWarning(ex.Message);
+
+            context.Response.StatusCode = 403;
+
+            await context.Response.WriteAsync(ex.Message);
+        }
         catch (UnauthorizedAccessException exception)
         {
             logger.LogWarning(exception.Message);

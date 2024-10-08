@@ -20,8 +20,17 @@ public class IdentityController(IMediator mediator) : ControllerBase
     }
 
     [Authorize(Roles = ApplicationRoles.Admin)]
-    [HttpPatch("userRole")]
+    [HttpPatch("assignUserRole")]
     public async Task<IActionResult> AssignUserRole([FromBody] AssignUserRoleCommand command)
+    {
+        await mediator.Send(command);
+
+        return NoContent();
+    }
+    
+    [Authorize(Roles = ApplicationRoles.Admin)]
+    [HttpPatch("unassignUserRole")]
+    public async Task<IActionResult> UnassignUserRole([FromBody] UnassignUserRoleCommand command)
     {
         await mediator.Send(command);
 

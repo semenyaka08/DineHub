@@ -1,4 +1,5 @@
 using AutoMapper;
+using DineHub.Application.User;
 using DineHub.Domain.Entities;
 using DineHub.Domain.RepositoryContracts;
 using MediatR;

@@ -12,6 +12,7 @@ namespace DineHub.Api.Controllers;
 public class RestaurantsController(IMediator mediator) : ControllerBase
 {
     [HttpGet]
+    [Authorize(Policy = ApplicationPolicies.MinimumAgeAndNationalityPolicy)]
     public async Task<IActionResult> GetAllRestaurants()
     {
         var restaurants = await mediator.Send(new GetAllRestaurantsQuery());

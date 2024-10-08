@@ -1,7 +1,11 @@
+using DineHub.Domain.Constants;
 using DineHub.Domain.Entities;
 using DineHub.Domain.RepositoryContracts;
+using DineHub.Infrastructure.Authorization;
+using DineHub.Infrastructure.Authorization.Requirements;
 using DineHub.Infrastructure.Repositories;
 using DineHub.Infrastructure.Seeders;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -21,10 +25,18 @@ public static class ServiceCollectionExtensions
 
         serviceCollection.AddIdentityApiEndpoints<User>()
             .AddRoles<IdentityRole>()
+            .AddClaimsPrincipalFactory<RestaurantsUserClaimsPrincipleFactory>()
             .AddEntityFrameworkStores<ApplicationDbContext>();
         
         serviceCollection.AddScoped<IRestaurantRepository, RestaurantRepository>();
         serviceCollection.AddScoped<IDishRepository, DishRepository>();
         serviceCollection.AddScoped<IDataSeeder, DataSeeder>();
+
+        serviceCollection.AddAuthorizationBuilder()
+            .AddPolicy(ApplicationPolicies.MinimumAgeAndNationalityPolicy,
+                builder => builder.AddRequirements(new MinimumAgeRequirement(18), new NationalityRequirement()));
+
+        serviceCollection.AddScoped<IAuthorizationHandler, MinimumAgeRequirementHandler>();
+        serviceCollection.AddScoped<IAuthorizationHandler, NationalityRequirementHandler>();
     }
 }

@@ -18,6 +18,14 @@ public class ExceptionHandlingMiddleware(ILogger<ExceptionHandlingMiddleware> lo
 
             await context.Response.WriteAsync(ex.Message);
         }
+        catch (UnauthorizedAccessException exception)
+        {
+            logger.LogWarning(exception.Message);
+
+            context.Response.StatusCode = 401;
+
+            await context.Response.WriteAsync(exception.Message);
+        }
         catch(Exception ex)
         {
             logger.LogError(ex, ex.Message);

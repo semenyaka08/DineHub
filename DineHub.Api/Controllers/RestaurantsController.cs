@@ -28,7 +28,7 @@ public class RestaurantsController(IMediator mediator) : ControllerBase
         return Ok(result);
     }
     
-    [Authorize(Roles = ApplicationRoles.Admin)]
+    [Authorize(Roles = ApplicationRoles.Owner)]
     [HttpPost]
     public async Task<IActionResult> CreateRestaurant([FromBody] CreateRestaurantCommand request)
     {

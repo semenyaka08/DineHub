@@ -1,10 +1,11 @@
+using DineHub.Application.Common;
 using DineHub.Domain.Entities;
 
 namespace DineHub.Domain.RepositoryContracts;
 
 public interface IRestaurantRepository
 {
-    Task<(List<Restaurant>, int itemsCount)> GetAllMatchingRestaurantsAsync(string? searchString, int pageSize, int pageNumber);
+    Task<(List<Restaurant>, int itemsCount)> GetAllMatchingRestaurantsAsync(string? searchString, int pageSize, int pageNumber, string sortItem, SortOrder sortOrder);
     
     Task<List<Restaurant>> GetAllRestaurantsAsync();
 

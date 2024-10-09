@@ -4,6 +4,8 @@ namespace DineHub.Domain.RepositoryContracts;
 
 public interface IRestaurantRepository
 {
+    Task<List<Restaurant>> GetAllMatchingRestaurantsAsync(string? searchString);
+    
     Task<List<Restaurant>> GetAllRestaurantsAsync();
 
     Task<Restaurant?> GetByIdAsync(Guid id);

@@ -6,17 +6,23 @@ namespace DineHub.Infrastructure.Repositories;
 
 public class RestaurantRepository(ApplicationDbContext context) : IRestaurantRepository
 {
-    public async Task<List<Restaurant>> GetAllMatchingRestaurantsAsync(string? searchString)
+    public async Task<(List<Restaurant>, int itemsCount)> GetAllMatchingRestaurantsAsync(string? searchString, int pageSize, int pageNumber)
     {
         var searchPhrase = searchString?.ToLower();
-        
-        var restaurants = await context.Restaurants
-            .Where(z=>searchPhrase == null
-                      || z.Name.ToLower().Contains(searchPhrase)
-                      || z.Description.ToLower().Contains(searchPhrase))
-            .ToListAsync();
 
-        return restaurants;
+        var baseQuery = context.Restaurants
+            .Where(z => searchPhrase == null
+                        || z.Name.ToLower().Contains(searchPhrase)
+                        || z.Description.ToLower().Contains(searchPhrase));
+
+        int itemsCount = await baseQuery.CountAsync();
+
+        var restaurants = await baseQuery
+            .Skip(pageSize * (pageNumber - 1))
+            .Take(pageNumber)
+            .ToListAsync();
+        
+        return (restaurants, itemsCount);
     }
 
     public async Task<List<Restaurant>> GetAllRestaurantsAsync()

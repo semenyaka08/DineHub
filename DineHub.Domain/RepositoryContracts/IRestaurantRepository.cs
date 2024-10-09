@@ -4,7 +4,7 @@ namespace DineHub.Domain.RepositoryContracts;
 
 public interface IRestaurantRepository
 {
-    Task<List<Restaurant>> GetAllMatchingRestaurantsAsync(string? searchString);
+    Task<(List<Restaurant>, int itemsCount)> GetAllMatchingRestaurantsAsync(string? searchString, int pageSize, int pageNumber);
     
     Task<List<Restaurant>> GetAllRestaurantsAsync();
 

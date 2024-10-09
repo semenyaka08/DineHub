@@ -1,3 +1,5 @@
+using System.Linq.Expressions;
+using DineHub.Application.Common;
 using DineHub.Domain.Entities;
 using DineHub.Domain.RepositoryContracts;
 using Microsoft.EntityFrameworkCore;
@@ -6,6 +8,34 @@ namespace DineHub.Infrastructure.Repositories;
 
 public class RestaurantRepository(ApplicationDbContext context) : IRestaurantRepository
 {
+    public async Task<(List<Restaurant>, int itemsCount)> GetAllMatchingRestaurantsAsync(string? searchString, int pageSize, int pageNumber, string sortItem, SortOrder sortOrder)
+    {
+        var searchPhrase = searchString?.ToLower();
+        var orderDictionary = new Dictionary<string, Expression<Func<Restaurant, object>>>()
+        {
+            {"Name", z=>z.Name},
+            {"Category", z=>z.Category},
+            {"Rating", z=>z.Rating}
+        };
+        
+        var baseQuery = context.Restaurants
+            .Where(z => searchPhrase == null
+                        || z.Name.ToLower().Contains(searchPhrase)
+                        || z.Description.ToLower().Contains(searchPhrase));
+
+        int itemsCount = await baseQuery.CountAsync();
+
+        var sortItemExpression = orderDictionary[sortItem];
+
+        var restaurants = baseQuery
+            .Skip(pageSize * (pageNumber - 1))
+            .Take(pageSize);
+
+        var orderedRestaurants = sortOrder == SortOrder.Ascending ?  await restaurants.OrderBy(sortItemExpression).ToListAsync() : await restaurants.OrderByDescending(sortItemExpression).ToListAsync();//await restaurants.OrderBy(sortItemExpression).ToListAsync();
+        
+        return (orderedRestaurants, itemsCount);
+    }
+
     public async Task<List<Restaurant>> GetAllRestaurantsAsync()
     {
         return await context.Restaurants.Include(z=>z.Dishes).ToListAsync();

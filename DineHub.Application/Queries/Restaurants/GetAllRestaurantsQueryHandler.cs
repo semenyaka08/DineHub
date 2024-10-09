@@ -1,22 +1,26 @@
 using AutoMapper;
+using DineHub.Application.Common;
 using DineHub.Application.Dtos.RestaurantDtos;
 using DineHub.Application.User;
 using DineHub.Domain.RepositoryContracts;
 using MediatR;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 
 namespace DineHub.Application.Queries.Restaurants;
 
-public class GetAllRestaurantsQueryHandler(ILogger<GetAllRestaurantsQueryHandler> logger, IRestaurantRepository restaurantRepository, IMapper mapper) : IRequestHandler<GetAllRestaurantsQuery, List<GetRestaurantDto>>
+public class GetAllRestaurantsQueryHandler(ILogger<GetAllRestaurantsQueryHandler> logger, IRestaurantRepository restaurantRepository, IMapper mapper) : IRequestHandler<GetAllRestaurantsQuery, PageResult<GetRestaurantDto>>
 {
-    public async Task<List<GetRestaurantDto>> Handle(GetAllRestaurantsQuery request, CancellationToken cancellationToken)
+    public async Task<PageResult<GetRestaurantDto>> Handle(GetAllRestaurantsQuery request, CancellationToken cancellationToken)
     {
         logger.LogInformation("Getting all restaurants!");
 
-        var restaurants = await restaurantRepository.GetAllRestaurantsAsync();
+        var (restaurants, itemsCount) = await restaurantRepository.GetAllMatchingRestaurantsAsync(request.SearchString, request.PageSize, request.PageNumber, request.SortItem, request.SortOrder);
 
         var restaurantsDto = mapper.Map<List<GetRestaurantDto>>(restaurants);
 
-        return restaurantsDto;
+        var pageResult = new PageResult<GetRestaurantDto>(restaurantsDto, itemsCount, request.PageSize, request.PageNumber);
+        
+        return pageResult;
     }
 }

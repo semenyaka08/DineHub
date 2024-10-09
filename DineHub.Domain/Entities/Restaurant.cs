@@ -1,3 +1,5 @@
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
+
 namespace DineHub.Domain.Entities;
 
 public class Restaurant
@@ -23,4 +25,6 @@ public class Restaurant
     public User User { get; set; }
 
     public string UserId { get; set; }
+
+    public double Rating { get; set; }
 }

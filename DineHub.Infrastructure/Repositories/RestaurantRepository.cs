@@ -1,6 +1,7 @@
 using System.Linq.Expressions;
 using DineHub.Application.Common;
 using DineHub.Domain.Entities;
+using DineHub.Domain.Enums;
 using DineHub.Domain.RepositoryContracts;
 using Microsoft.EntityFrameworkCore;
 
@@ -27,13 +28,14 @@ public class RestaurantRepository(ApplicationDbContext context) : IRestaurantRep
 
         var sortItemExpression = orderDictionary[sortItem];
 
-        var restaurants = baseQuery
-            .Skip(pageSize * (pageNumber - 1))
-            .Take(pageSize);
-
-        var orderedRestaurants = sortOrder == SortOrder.Ascending ?  await restaurants.OrderBy(sortItemExpression).ToListAsync() : await restaurants.OrderByDescending(sortItemExpression).ToListAsync();//await restaurants.OrderBy(sortItemExpression).ToListAsync();
+        var orderedRestaurants = sortOrder == SortOrder.Ascending ?  await baseQuery.OrderBy(sortItemExpression).ToListAsync() : await baseQuery.OrderByDescending(sortItemExpression).ToListAsync();//await restaurants.OrderBy(sortItemExpression).ToListAsync();
         
-        return (orderedRestaurants, itemsCount);
+        var restaurants = orderedRestaurants
+            .Skip(pageSize * (pageNumber - 1))
+            .Take(pageSize)
+            .ToList();
+        
+        return (restaurants, itemsCount);
     }
 
     public async Task<List<Restaurant>> GetAllRestaurantsAsync()

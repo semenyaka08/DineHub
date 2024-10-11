@@ -1,4 +1,5 @@
 using DineHub.Application.Common;
+using DineHub.Domain.Enums;
 using FluentValidation;
 
 namespace DineHub.Application.Queries.Restaurants;

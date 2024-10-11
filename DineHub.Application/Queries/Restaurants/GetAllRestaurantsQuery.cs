@@ -1,5 +1,6 @@
 using DineHub.Application.Common;
 using DineHub.Application.Dtos.RestaurantDtos;
+using DineHub.Domain.Enums;
 using MediatR;
 
 namespace DineHub.Application.Queries.Restaurants;

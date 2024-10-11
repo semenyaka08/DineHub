@@ -19,6 +19,8 @@ public class GetRestaurantDto
     public string Street { get; set; } = string.Empty;
 
     public string PostalCode { get; set; } = string.Empty;
+    
+    public double Rating { get; set; }
 
     public List<DishDto> Dishes { get; set; } = [];
 }

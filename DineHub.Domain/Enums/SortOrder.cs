@@ -1,4 +1,4 @@
-namespace DineHub.Application.Common;
+namespace DineHub.Domain.Enums;
 
 public enum SortOrder
 {

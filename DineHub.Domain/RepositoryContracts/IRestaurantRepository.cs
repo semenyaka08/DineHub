@@ -1,5 +1,5 @@
-using DineHub.Application.Common;
 using DineHub.Domain.Entities;
+using DineHub.Domain.Enums;
 
 namespace DineHub.Domain.RepositoryContracts;
 

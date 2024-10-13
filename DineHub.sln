@@ -10,6 +10,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DineHub.Domain", "DineHub.D
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DineHub.Application.Tests", "DineHub.Application.Tests\DineHub.Application.Tests.csproj", "{65F3585E-E60D-4EEB-9902-EAAA099178F5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DineHub.Api.Tests", "DineHub.Api.Tests\DineHub.Api.Tests.csproj", "{7B69691D-8BC3-4DAF-93D2-468557FFC8A3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -36,5 +38,9 @@ Global
 		{65F3585E-E60D-4EEB-9902-EAAA099178F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{65F3585E-E60D-4EEB-9902-EAAA099178F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{65F3585E-E60D-4EEB-9902-EAAA099178F5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7B69691D-8BC3-4DAF-93D2-468557FFC8A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7B69691D-8BC3-4DAF-93D2-468557FFC8A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7B69691D-8BC3-4DAF-93D2-468557FFC8A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7B69691D-8BC3-4DAF-93D2-468557FFC8A3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

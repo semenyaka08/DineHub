@@ -23,7 +23,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\DineHub.Api\DineHub.Api.csproj" />
+      <ProjectReference Include="..\..\src\DineHub.Api\DineHub.Api.csproj" />
     </ItemGroup>
 
 </Project>

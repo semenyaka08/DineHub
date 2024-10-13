@@ -28,12 +28,14 @@ public class RestaurantRepository(ApplicationDbContext context) : IRestaurantRep
 
         var sortItemExpression = orderDictionary[sortItem];
 
-        var orderedRestaurants = sortOrder == SortOrder.Ascending ?  await baseQuery.OrderBy(sortItemExpression).ToListAsync() : await baseQuery.OrderByDescending(sortItemExpression).ToListAsync();//await restaurants.OrderBy(sortItemExpression).ToListAsync();
+        var orderedRestaurants = sortOrder == SortOrder.Ascending
+            ? baseQuery.OrderBy(sortItemExpression)
+            : baseQuery.OrderByDescending(sortItemExpression);//await restaurants.OrderBy(sortItemExpression).ToListAsync();
         
-        var restaurants = orderedRestaurants
+        var restaurants =  await orderedRestaurants
             .Skip(pageSize * (pageNumber - 1))
             .Take(pageSize)
-            .ToList();
+            .ToListAsync();
         
         return (restaurants, itemsCount);
     }

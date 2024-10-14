@@ -1,6 +1,8 @@
 using DineHub.Application.Commands.Dishes;
 using DineHub.Application.Queries.Dishes;
+using DineHub.Domain.Constants;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DineHub.Api.Controllers;
@@ -9,6 +11,7 @@ namespace DineHub.Api.Controllers;
 [Route("api/restaurants/{restaurantId}/dishes")]
 public class DishesController(IMediator mediator) : ControllerBase
 {
+    [Authorize(Roles = ApplicationRoles.Owner)]
     [HttpPost]
     public async Task<IActionResult> CreateDish([FromRoute] Guid restaurantId, [FromBody] CreateDishCommand request)
     {
@@ -35,6 +38,7 @@ public class DishesController(IMediator mediator) : ControllerBase
         return Ok(dish);
     }
 
+    [Authorize(Roles = ApplicationRoles.Owner)]
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteDish([FromRoute] Guid restaurantId, [FromRoute] Guid id)
     {
@@ -43,6 +47,7 @@ public class DishesController(IMediator mediator) : ControllerBase
         return NoContent();
     }
 
+    [Authorize(Roles = ApplicationRoles.Owner)]
     [HttpPatch("{dishId}")]
     public async Task<IActionResult> UpdateDish([FromRoute] Guid restaurantId, [FromRoute] Guid dishId, [FromBody] UpdateDishCommand command)
     {

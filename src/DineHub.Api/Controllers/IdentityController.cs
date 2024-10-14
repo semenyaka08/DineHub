@@ -10,8 +10,8 @@ namespace DineHub.Api.Controllers;
 [Route("api/identity")]
 public class IdentityController(IMediator mediator) : ControllerBase
 {
-    [Authorize(Roles = ApplicationRoles.Admin)]
-    [HttpPatch("update")]
+    [Authorize]
+    [HttpPatch("updateUserDetails")]
     public async Task<IActionResult> UpdateUserDetails([FromBody] UpdateUserDetailsCommand command)
     {
         await mediator.Send(command);
@@ -32,6 +32,18 @@ public class IdentityController(IMediator mediator) : ControllerBase
     [HttpPatch("unassignUserRole")]
     public async Task<IActionResult> UnassignUserRole([FromBody] UnassignUserRoleCommand command)
     {
+        await mediator.Send(command);
+
+        return NoContent();
+    }
+
+    [Authorize]
+    [HttpPatch("updateUserRole")]
+    public async Task<IActionResult> UpdateUserRole([FromBody] UpdateUserRoleCommand command)
+    {
+        if (command.Role.ToLower() == "admin")
+            return BadRequest("This role is forbidden for you");
+        
         await mediator.Send(command);
 
         return NoContent();

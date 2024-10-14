@@ -19,7 +19,6 @@ public class RestaurantsController(IMediator mediator) : ControllerBase
         return Ok(restaurants);
     }
     
-    [Authorize]
     [HttpGet("{id}")]
     public async Task<IActionResult> GetRestaurantById([FromRoute] Guid id)
     {
@@ -28,7 +27,7 @@ public class RestaurantsController(IMediator mediator) : ControllerBase
         return Ok(result);
     }
     
-    [Authorize]
+    [Authorize(Roles = ApplicationRoles.Owner)]
     [HttpPost]
     public async Task<IActionResult> CreateRestaurant([FromBody] CreateRestaurantCommand request)
     {
@@ -37,7 +36,7 @@ public class RestaurantsController(IMediator mediator) : ControllerBase
         return CreatedAtAction(nameof(GetRestaurantById), new {id}, null);
     }
 
-    [Authorize(Roles = ApplicationRoles.Admin)]
+    [Authorize]
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteRestaurantById(Guid id)
     {

@@ -19,7 +19,6 @@ public class RestaurantsController(IMediator mediator) : ControllerBase
         return Ok(restaurants);
     }
     
-    [Authorize]
     [HttpGet("{id}")]
     public async Task<IActionResult> GetRestaurantById([FromRoute] Guid id)
     {

@@ -46,7 +46,7 @@ public class RestaurantsController(IMediator mediator) : ControllerBase
     }
 
     [Authorize]
-    [HttpPatch("{id}")]
+    [HttpPatch("{id}/info")]
     public async Task<IActionResult> UpdateRestaurant([FromRoute] Guid id, [FromBody] UpdateRestaurantCommand request)
     {
         request.Id = id;
@@ -54,5 +54,24 @@ public class RestaurantsController(IMediator mediator) : ControllerBase
         await mediator.Send(request);
         
         return NoContent();
+    }
+    
+    
+    [HttpPatch("{id}/logo")]
+    public async Task<IActionResult> UpdateRestaurantLogo([FromRoute] Guid id, IFormFile file)
+    {
+        await using var stream = file.OpenReadStream();
+
+        var command = new UpdateRestaurantLogoCommand
+        {
+            RestaurantId = id,
+            FileName = file.FileName,
+            File = stream
+        };
+
+        await mediator.Send(command);
+
+        return NoContent();
+
     }
 }

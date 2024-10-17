@@ -2,11 +2,14 @@ using DineHub.Domain.Constants;
 using DineHub.Domain.Entities;
 using DineHub.Domain.Interfaces;
 using DineHub.Domain.RepositoryContracts;
+using DineHub.Domain.Storage;
 using DineHub.Infrastructure.Authorization;
 using DineHub.Infrastructure.Authorization.Requirements;
+using DineHub.Infrastructure.Configuration;
 using DineHub.Infrastructure.Repositories;
 using DineHub.Infrastructure.Seeders;
 using DineHub.Infrastructure.Services;
+using DineHub.Infrastructure.Storage;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -41,5 +44,8 @@ public static class ServiceCollectionExtensions
 
         serviceCollection.AddScoped<IAuthorizationHandler, MinimumAgeRequirementHandler>();
         serviceCollection.AddScoped<IAuthorizationHandler, NationalityRequirementHandler>();
+
+        serviceCollection.Configure<BlobConfiguration>(configuration.GetSection("BlobStorage"));
+        serviceCollection.AddScoped<IBlobStorageService, BlobStorageService>();
     }
 }

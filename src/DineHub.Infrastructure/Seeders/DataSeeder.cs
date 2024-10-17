@@ -1,5 +1,6 @@
 using DineHub.Domain.Constants;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
 namespace DineHub.Infrastructure.Seeders;
 
@@ -7,6 +8,10 @@ public class DataSeeder(ApplicationDbContext context ) : IDataSeeder
 {
     public async Task Seed()
     {
+        if ((await context.Database.GetPendingMigrationsAsync()).Any())
+        {
+            await context.Database.MigrateAsync();
+        }
         if (await context.Database.CanConnectAsync())
         {
             if (!context.Roles.Any())

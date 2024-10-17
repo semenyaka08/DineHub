@@ -27,4 +27,5 @@ public class Restaurant
     public string UserId { get; set; }
 
     public double Rating { get; set; }
+    public string? LogoUrl { get; set; }
 }

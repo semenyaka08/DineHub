@@ -3,12 +3,13 @@ using DineHub.Application.Dtos.RestaurantDtos;
 using DineHub.Domain.Entities;
 using DineHub.Domain.Exceptions;
 using DineHub.Domain.RepositoryContracts;
+using DineHub.Domain.Storage;
 using MediatR;
 using Microsoft.Extensions.Logging;
 
 namespace DineHub.Application.Queries.Restaurants;
 
-public class GetRestaurantByIdQueryHandler(ILogger<GetRestaurantByIdQueryHandler> logger, IRestaurantRepository restaurantRepository, IMapper mapper) : IRequestHandler<GetRestaurantByIdQuery, GetRestaurantDto>
+public class GetRestaurantByIdQueryHandler(ILogger<GetRestaurantByIdQueryHandler> logger, IRestaurantRepository restaurantRepository, IMapper mapper, IBlobStorageService blobStorageService) : IRequestHandler<GetRestaurantByIdQuery, GetRestaurantDto>
 {
     public async Task<GetRestaurantDto> Handle(GetRestaurantByIdQuery request, CancellationToken cancellationToken)
     {
@@ -21,6 +22,8 @@ public class GetRestaurantByIdQueryHandler(ILogger<GetRestaurantByIdQueryHandler
 
         var restaurantDto = mapper.Map<GetRestaurantDto>(restaurant);
 
+        restaurantDto.SasBlobUrl = blobStorageService.GetBlobSasUrl(restaurant.LogoUrl);
+        
         return restaurantDto;
     }
 }

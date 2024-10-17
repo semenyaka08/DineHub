@@ -42,5 +42,7 @@ public static class WebApplicationBuilderExtension
         {
             configuration.ReadFrom.Configuration(context.Configuration);
         });
+
+        builder.Configuration.AddJsonFile("appsettings.BlobSecrets.json", optional: true, reloadOnChange: true);
     }
 }

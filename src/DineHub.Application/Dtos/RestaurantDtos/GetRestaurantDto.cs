@@ -22,5 +22,7 @@ public class GetRestaurantDto
     
     public double Rating { get; set; }
 
+    public string? SasBlobUrl { get; set; }
+
     public List<DishDto> Dishes { get; set; } = [];
 }
